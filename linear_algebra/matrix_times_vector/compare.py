@@ -13,7 +13,7 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['MVT_cpp', 'MVT_c']
+    exec_files = ['MTV_cpp']
     testcase_input = './input'
     output_folder = './output'
     golden_output_folder = './groundtruth_output'
@@ -41,17 +41,28 @@ def compare():
         for i in range(num_testcase):
             with open(f'{golden_output_folder}/{i}.out', 'r') as f:
                 ans_gt = f.read().splitlines()
-                ans_gt = [e.strip() for e in ans_gt]
+                ans_gt = [e.strip() for e in ans_gt][0]
+                ans_gt = list(map(float, ans_gt.split(' ')))
 
             with open(f'{output_folder}/{i}.out', 'r') as f:
                 ans = f.read().splitlines()
-                ans = [e.strip() for e in ans]
+                ans = [e.strip() for e in ans][0]
+                ans = list(map(float, ans.split(' ')))
 
-            if ans != ans_gt:
+            if len(ans) != len(ans_gt):
                 result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
                 wa_count += 1
             else:
-                result = f'{bcolors.OKGREEN}AC{bcolors.ENDC}'
+                is_wa = False
+                for j in range(len(ans)):
+                    if abs(ans[j] - ans_gt[j]) > config['tolerance']:
+                        result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
+                        wa_count += 1
+                        is_wa = True
+                        break
+                
+                if not is_wa:
+                    result = f'{bcolors.OKGREEN}AC{bcolors.ENDC}'
 
             results.append(result)
             print('{:^10s}{:^10s}{:^10s}'.format('#' + str(i), result, str(runtimes[i]) + 'ms'))
@@ -62,7 +73,7 @@ def compare():
         print('{:<9s}:   {:>3s} KB'.format('Memory', str(round(sum(memories) / num_testcase))))
         print('\n')
 
-        shutil.rmtree(output_folder)
+        # shutil.rmtree(output_folder)
 
     p = subprocess.Popen(f'make clean', shell=True)
     p.wait()

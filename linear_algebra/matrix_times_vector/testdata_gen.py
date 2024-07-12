@@ -13,7 +13,7 @@ random.seed(config['seed'])
 
 def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:
     if len(a[0]) != len(b):
-        return -1
+        return [-1]
     
     vals = []
     for i in a:
@@ -39,21 +39,17 @@ def gen() -> list[list[str], list[str]]:
         mat_A.append(row_data)
         testcase_input.append(row_data)
 
-    vec_B_row = config['size_B_row_size']
-    vec_B_col = mat_A_col
+    vec_B_col = config['size_B_col_size']
+    vec_B_row = mat_A_col
     if random.random() < config['prob_mismatch']:
-        while vec_B_col == mat_A_col:
-            vec_B_col = random.randint(config['size_B_col_lower'], config['size_B_col_upper'])    
+        while vec_B_row == mat_A_col:
+            vec_B_row = random.randint(config['size_B_row_lower'], config['size_B_row_upper'])    
 
     testcase_input.append([vec_B_row, vec_B_col])
-    vec_B = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(vec_B_col)]
+    vec_B = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(vec_B_row)]
     testcase_input.append(vec_B)
 
-    ans = matrix_dot_vector(mat_A, vec_B)
-    if ans == -1:
-        testcase_output.append([-1])
-    else:
-        testcase_output.append(ans)
+    testcase_output.append(matrix_dot_vector(mat_A, vec_B))
 
     return testcase_input, testcase_output
         
@@ -80,7 +76,7 @@ def main(input_path: str, output_path: str) -> None:
 
 if __name__ == '__main__':
     input_path = './input'
-    output_path = './golden_output'
+    output_path = './groundtruth_output'
     os.makedirs(input_path, exist_ok=True)
     os.makedirs(output_path, exist_ok=True)
     main(input_path, output_path)
