@@ -13,7 +13,7 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['MTV_cpp']
+    exec_files = ['MTV_cpp', 'MTV_c']
     testcase_input = './input'
     output_folder = './output'
     golden_output_folder = './groundtruth_output'
