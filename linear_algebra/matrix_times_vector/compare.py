@@ -13,10 +13,10 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['sort_cpp', 'sort_c']
+    exec_files = ['MVT_cpp', 'MVT_c']
     testcase_input = './input'
     output_folder = './output'
-    golden_output_folder = './golden_output'
+    golden_output_folder = './groundtruth_output'
 
     p = subprocess.Popen(f'make', shell=True)
     p.wait()

@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import os
 import random
 from config import config
-from typing import List, Tuple
 
 class bcolors:
     OKGREEN = '\033[92m'
@@ -10,33 +11,49 @@ class bcolors:
 
 random.seed(config['seed'])
 
+def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:
+    if len(a[0]) != len(b):
+        return -1
+    
+    vals = []
+    for i in a:
+        hold = 0
+        for j in range(len(i)):
+            hold+=(i[j] * b[j])
+        vals.append(hold)
 
-def gen() -> Tuple[List[str], List[str]]:
+    return vals
+
+
+def gen() -> list[list[str], list[str]]:
     testcase_input = []
     testcase_output = []
 
-    data_size = random.randint(config['size_lower'], config['size_upper'])
-    testcase_input.append(data_size)
+    mat_A_row = random.randint(config['size_A_row_lower'], config['size_A_row_upper'])
+    mat_A_col = random.randint(config['size_A_col_lower'], config['size_A_col_upper'])
 
-    flag = random.random() < config['prob_flag']
-    if flag:
-        testcase_input.append(1)
+    testcase_input.append([mat_A_row, mat_A_col])
+    mat_A = []
+    for _ in range(mat_A_row):
+        row_data = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(mat_A_col)]
+        mat_A.append(row_data)
+        testcase_input.append(row_data)
+
+    vec_B_row = config['size_B_row_size']
+    vec_B_col = mat_A_col
+    if random.random() < config['prob_mismatch']:
+        while vec_B_col == mat_A_col:
+            vec_B_col = random.randint(config['size_B_col_lower'], config['size_B_col_upper'])    
+
+    testcase_input.append([vec_B_row, vec_B_col])
+    vec_B = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(vec_B_col)]
+    testcase_input.append(vec_B)
+
+    ans = matrix_dot_vector(mat_A, vec_B)
+    if ans == -1:
+        testcase_output.append([-1])
     else:
-        testcase_input.append(0)
-    
-    data = []
-    for _ in range(data_size):
-        d = random.randint(config['value_lower'], config['value_upper'])
-        testcase_input.append(d)
-        data.append(d)
-
-    if flag:
-        data_sort = sorted(data, reverse=True)
-    else:
-        data_sort = sorted(data)
-
-    for d in data_sort:
-        testcase_output.append(d)
+        testcase_output.append(ans)
 
     return testcase_input, testcase_output
         
@@ -49,12 +66,14 @@ def main(input_path: str, output_path: str) -> None:
         input_path_index = os.path.join(input_path, f'{i}.in')
         with open(input_path_index, 'w') as f_in:
             for line in input:
-                f_in.writelines(f'{line}\n')
+                line_str = [str(e) for e in line]
+                f_in.writelines(f'{" ".join(line_str)}\n')
         
         output_path_index = os.path.join(output_path, f'{i}.out')
         with open(output_path_index, 'w') as f_out:
             for line in output:
-                f_out.writelines(f'{line}\n')
+                line_str = [str(e) for e in line]
+                f_out.writelines(f'{" ".join(line_str)}\n')
 
         print(f'{bcolors.OKGREEN}Pattern no.{i} done!{bcolors.ENDC}')
 
