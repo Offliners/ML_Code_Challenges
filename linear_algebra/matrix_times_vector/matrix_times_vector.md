@@ -1,6 +1,7 @@
 # Matrix times Vector
 Difficulty: `easy`
 
+## Description
 Consider a matrix $A$ and a vector $v$, where Matrix $A$:
 ```math
 A = \begin{pmatrix}
@@ -24,5 +25,5 @@ a_{11}v_1 + a_{12}v_2 \\
 a_{21}v_1 + a_{22}v_2
 \end{pmatrix}
 ```
- 
+
 Things to note: an  matrix will need to be multiplied by a vector of size  or else this will not work.
