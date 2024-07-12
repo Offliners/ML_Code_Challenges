@@ -46,6 +46,7 @@ vector<double> matrix_dot_vector(vector<vector<double>> &mat, vector<double> &ve
     int result_row = mat.size();
     int result_col = vec.size();
     vector<double> result(result_row);
+
     for(int i = 0; i < result_row; ++i)
         for(int j = 0; j < result_col; ++j)
                 result[i] += mat[i][j] * vec[j];

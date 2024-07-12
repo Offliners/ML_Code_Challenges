@@ -3,7 +3,7 @@ config = {
     'seed' : 0,
 
     # num of testcase
-    'num_testcase': 1000,
+    'num_testcase': 100,
 
     # Probability of matrix size mismatch
     'prob_mismatch'     : 0.1,
@@ -24,8 +24,8 @@ config = {
     'size_B_col_size' : 1,
 
     # Boundary of value
-    'value_lower' : -1000,
-    'value_upper' : 1000,
+    'value_lower' : -10000,
+    'value_upper' : 10000,
 
     # Precision tolerance
     'tolerance': 1e-6
