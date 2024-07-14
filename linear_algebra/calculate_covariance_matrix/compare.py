@@ -13,7 +13,7 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['CCM_cpp']
+    exec_files = ['CCM_cpp', 'CCM_c']
     testcase_input = './input'
     output_folder = './output'
     golden_output_folder = './groundtruth_output'
