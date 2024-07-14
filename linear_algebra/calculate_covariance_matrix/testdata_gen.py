@@ -11,45 +11,40 @@ class bcolors:
 
 random.seed(config['seed'])
 
-def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:
-    if len(a[0]) != len(b):
-        return [-1]
-    
-    vals = []
-    for i in a:
-        hold = 0
-        for j in range(len(i)):
-            hold+=(i[j] * b[j])
-        vals.append(hold)
+def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:
+    n_features = len(vectors)
+    n_observations = len(vectors[0])
+    covariance_matrix = [[0 for _ in range(n_features)] for _ in range(n_features)]
 
-    return vals
+    means = [sum(feature) / n_observations for feature in vectors]
+
+    for i in range(n_features):
+        for j in range(i, n_features):
+            covariance = sum((vectors[i][k] - means[i]) * (vectors[j][k] - means[j]) for k in range(n_observations)) / (n_observations - 1)
+            covariance_matrix[i][j] = covariance_matrix[j][i] = covariance
+
+    return covariance_matrix
 
 
 def gen() -> list[list[str], list[str]]:
     testcase_input = []
     testcase_output = []
 
-    mat_A_row = random.randint(config['size_A_row_lower'], config['size_A_row_upper'])
-    mat_A_col = random.randint(config['size_A_col_lower'], config['size_A_col_upper'])
+    vec_row = random.randint(config['size_row_lower'], config['size_row_upper'])
+    vec_col = config['size_col_size']
 
-    testcase_input.append([mat_A_row, mat_A_col])
-    mat_A = []
-    for _ in range(mat_A_row):
-        row_data = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(mat_A_col)]
-        mat_A.append(row_data)
-        testcase_input.append(row_data)
+    testcase_input.append([vec_row, vec_col])
+    num_vec = random.randint(config['vec_lower'], config['vec_upper'])
+    testcase_input.append([num_vec])
 
-    vec_B_col = config['size_B_col_size']
-    vec_B_row = mat_A_col
-    if random.random() < config['prob_mismatch']:
-        while vec_B_row == mat_A_col:
-            vec_B_row = random.randint(config['size_B_row_lower'], config['size_B_row_upper'])    
+    vecs = [[random.uniform(config['value_lower'], config['value_upper']) for _ in range(vec_row)] for _ in range(num_vec)]
 
-    testcase_input.append([vec_B_row, vec_B_col])
-    vec_B = [random.uniform(config['value_lower'], config['value_upper']) for _ in range(vec_B_row)]
-    testcase_input.append(vec_B)
-
-    testcase_output.append(matrix_dot_vector(mat_A, vec_B))
+    for i in range(num_vec):
+        testcase_input.append(vecs[i])
+    
+    ans = calculate_covariance_matrix(vecs)
+    for i in range(num_vec):
+        testcase_output.append(ans[i])
 
     return testcase_input, testcase_output
         

@@ -5,23 +5,16 @@ config = {
     # num of testcase
     'num_testcase': 100,
 
-    # Probability of matrix size mismatch
-    'prob_mismatch'     : 0.1,
+    # Boundary of vector amount
+    'vec_lower': 2,
+    'vec_upper': 100,
 
-    # Boundary of matrix A row size
-    'size_A_row_lower' : 2,
-    'size_A_row_upper' : 500,
+    # Boundary of Vector row size
+    'size_row_lower' : 2,
+    'size_row_upper' : 500,
 
-    # Boundary of matrix A col size
-    'size_A_col_lower' : 2,
-    'size_A_col_upper' : 500,
-
-    # Boundary of Vector B row size
-    'size_B_row_lower' : 2,
-    'size_B_row_upper' : 500,
-
-    # Vector B col size
-    'size_B_col_size' : 1,
+    # Vector col size
+    'size_col_size' : 1,
 
     # Boundary of value
     'value_lower' : -10000,
