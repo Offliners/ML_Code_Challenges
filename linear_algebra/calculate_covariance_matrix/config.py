@@ -7,7 +7,7 @@ config = {
 
     # Boundary of vector amount
     'vec_lower': 2,
-    'vec_upper': 100,
+    'vec_upper': 500,
 
     # Boundary of Vector row size
     'size_row_lower' : 2,

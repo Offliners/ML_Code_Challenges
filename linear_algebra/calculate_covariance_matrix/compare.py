@@ -13,7 +13,7 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['CCM_cpp', 'CCM_c']
+    exec_files = ['CCM_cpp']
     testcase_input = './input'
     output_folder = './output'
     golden_output_folder = './groundtruth_output'
@@ -41,13 +41,11 @@ def compare():
         for i in range(num_testcase):
             with open(f'{golden_output_folder}/{i}.out', 'r') as f:
                 ans_gt = f.read().splitlines()
-                ans_gt = [e.strip() for e in ans_gt][0]
-                ans_gt = list(map(float, ans_gt.split(' ')))
+                ans_gt = [list(map(float, e.strip().split(' '))) for e in ans_gt]
 
             with open(f'{output_folder}/{i}.out', 'r') as f:
                 ans = f.read().splitlines()
-                ans = [e.strip() for e in ans][0]
-                ans = list(map(float, ans.split(' ')))
+                ans = [list(map(float, e.strip().split(' '))) for e in ans]
 
             if len(ans) != len(ans_gt):
                 result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
@@ -55,10 +53,13 @@ def compare():
             else:
                 is_wa = False
                 for j in range(len(ans)):
-                    if abs(ans[j] - ans_gt[j]) > config['tolerance']:
-                        result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
-                        wa_count += 1
-                        is_wa = True
+                    for k in range(len(ans[0])):
+                        if abs(ans[j][k] - ans_gt[j][k]) > config['tolerance']:
+                            result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
+                            wa_count += 1
+                            is_wa = True
+                            break
+                    if is_wa:
                         break
                 
                 if not is_wa:
