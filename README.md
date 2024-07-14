@@ -15,6 +15,7 @@ $ python3 compare.py
 ```
 
 ## Problems
-| Title               | Category       | Difficulty | Link                                                                |
-| ------------------- | -------------- | ---------- | ------------------------------------------------------------------- |
-| Matrix times Vector | linear algebra | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md) |
+| Title                       | Category       | Difficulty | Link                                                                                |
+| --------------------------- | -------------- | ---------- | ----------------------------------------------------------------------------------- |
+| Matrix times Vector         | linear algebra | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md)                 |
+| Calculate Covariance Matrix | linear algebra | Medium     | [link](./linear_algebra/calculate_covariance_matrix/calculate_covariance_matrix.md) |
