@@ -3,6 +3,9 @@ Deep ML : [link](https://www.deep-ml.com/)
 
 ## Usage
 ```shell
+# Install required Python3 library
+$ pip3 install -r requirements.txt
+
 # Change directory to the problem you are interested in
 $ cd ./{Category}/{Title}
 
