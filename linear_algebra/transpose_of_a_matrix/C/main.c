@@ -60,6 +60,9 @@ double **transpose_matrix(double **mat, int mat_row, int mat_col, int *return_ma
 
 void free_matrix(double **mat, int row)
 {
+    if(!mat)
+        return;
+
     for(int i = 0; i < row; ++i)
         free(mat[i]);
     
