@@ -19,3 +19,4 @@ $ python3 compare.py
 | --------------------------- | -------------- | ---------- | ----------------------------------------------------------------------------------- |
 | Matrix times Vector         | linear algebra | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md)                 |
 | Calculate Covariance Matrix | linear algebra | Medium     | [link](./linear_algebra/calculate_covariance_matrix/calculate_covariance_matrix.md) |
+| Transpose of a Matrix       | linear algebra | Easy       | [link](./linear_algebra/transpose_of_a_matrix/transpose_of_a_matrix.md)             |
