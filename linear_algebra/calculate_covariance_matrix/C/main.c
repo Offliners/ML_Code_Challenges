@@ -97,6 +97,9 @@ double **calculate_covariance_matrix(double **vecs, int vecs_row, int vecs_col, 
 
 void free_matrix(double **mat, int row)
 {
+    if(!mat)
+        return;
+
     for(int i = 0; i < row; ++i)
         free(mat[i]);
     
@@ -105,5 +108,8 @@ void free_matrix(double **mat, int row)
 
 void free_vector(double *vec)
 {
+    if(!vec)
+        return;
+
     free(vec);
 }
