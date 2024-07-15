@@ -1,5 +1,5 @@
 # Matrix times Matrix
-Difficulty: `easy`
+Difficulty: `medium`
 
 ## Description
 Consider two matrices $A$ and $B$, to demonstrate their multiplication, defined as follows: Matrix $A$:
