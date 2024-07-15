@@ -18,8 +18,9 @@ $ python3 compare.py
 ```
 
 ## Problems
-| Title                       | Category       | Difficulty | Link                                                                                |
-| --------------------------- | -------------- | ---------- | ----------------------------------------------------------------------------------- |
-| Matrix times Vector         | linear algebra | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md)                 |
-| Calculate Covariance Matrix | linear algebra | Medium     | [link](./linear_algebra/calculate_covariance_matrix/calculate_covariance_matrix.md) |
-| Transpose of a Matrix       | linear algebra | Easy       | [link](./linear_algebra/transpose_of_a_matrix/transpose_of_a_matrix.md)             |
+| Title                                   | Category         | Difficulty | Link                                                                                                          |
+| --------------------------------------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| Matrix times Vector                     | linear algebra   | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md)                                           |
+| Calculate Covariance Matrix             | linear algebra   | Medium     | [link](./linear_algebra/calculate_covariance_matrix/calculate_covariance_matrix.md)                           |
+| Linear Regression Using Normal Equation | machine learning | Easy       | [link](./machine_learning/linear_regression_using_normal_equation/linear_regression_using_normal_equation.md) |
+| Transpose of a Matrix                   | linear algebra   | Easy       | [link](./linear_algebra/transpose_of_a_matrix/transpose_of_a_matrix.md)                                       |
