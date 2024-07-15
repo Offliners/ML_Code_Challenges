@@ -66,7 +66,7 @@ double *matrix_dot_vector(double **mat, int mat_row, int mat_col, double *vec, i
     if(mat_col != vec_row)
         return NULL;
     
-    double *ans = (double*)malloc(mat_row * sizeof(double));
+    double *ans = create_vector(mat_row);
 
     for(int i = 0; i < mat_row; ++i)
         for(int j = 0; j < vec_row; ++j)
@@ -77,6 +77,9 @@ double *matrix_dot_vector(double **mat, int mat_row, int mat_col, double *vec, i
 
 void free_matrix(double **mat, int row)
 {
+    if(!mat)
+        return;
+
     for(int i = 0; i < row; ++i)
         free(mat[i]);
     
@@ -85,5 +88,8 @@ void free_matrix(double **mat, int row)
 
 void free_vector(double *vec)
 {
+    if(!vec)
+        return;
+
     free(vec);
 }
