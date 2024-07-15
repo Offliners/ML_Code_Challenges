@@ -8,6 +8,8 @@ vector<double> linear_regression_normal_equation(vector<vector<double>>&, vector
 vector<vector<double>> transpose_matrix(vector<vector<double>>&);
 vector<vector<double>> matrix_multiplication(vector<vector<double>>&, vector<vector<double>>&);
 vector<vector<double>> matrix_inverse(vector<vector<double>>&);
+double matrix_determinant(vector<vector<double>>&);
+vector<vector<double>> get_cofactor_matrix(vector<vector<double>>&);
 vector<double> matrix_dot_vector(vector<vector<double>>&, vector<double>&);
 
 int main(void)
@@ -41,8 +43,9 @@ vector<double> linear_regression_normal_equation(vector<vector<double>> &X, vect
 {
     vector<vector<double>> X_T = transpose_matrix(X);
     vector<vector<double>> X_T_X = matrix_multiplication(X_T, X);
-
-    vector<double> theta = matrix_dot_vector(X_T_X, y);
+    vector<vector<double>> X_T_X_inv = matrix_inverse(X_T_X);
+    vector<vector<double>> X_T_X_inv_X_T = matrix_multiplication(X_T_X_inv, X_T);
+    vector<double> theta = matrix_dot_vector(X_T_X_inv_X_T, y);
 
     return theta;
 }
@@ -67,7 +70,10 @@ vector<vector<double>> matrix_multiplication(vector<vector<double>> &A, vector<v
     int B_col = B[0].size();
 
     if(A_col != B_row)
+    {
+        cout << "Invalid size!" << endl;
         return {{}};
+    }
     
     vector<vector<double>> C(A_row, vector<double>(B_col, 0));
     for(int i = 0; i < A_row; ++i)
@@ -80,13 +86,119 @@ vector<vector<double>> matrix_multiplication(vector<vector<double>> &A, vector<v
 
 vector<vector<double>> matrix_inverse(vector<vector<double>> &A)
 {
+    double det = matrix_determinant(A);
+    if(det == 0)
+    {
+        cout << "The determinant of the matrix is zero!" << endl;
+        return {{}};
+    }
 
+    double det_inv = 1 / det;
+    int dim = A.size();
+    vector<vector<double>> inv_mat = A;
+    inv_mat = get_cofactor_matrix(inv_mat);
+    inv_mat = transpose_matrix(inv_mat);
+
+    for(int i = 0; i < dim; ++i)
+        for(int j = 0; j < dim; ++j)
+            inv_mat[i][j] *= det_inv;
+
+    return inv_mat;
+}
+
+double matrix_determinant(vector<vector<double>> &A)
+{
+    if(A.size() != A[0].size())
+    {
+        cout << "Invalid size!" << endl;
+        return -1;
+    }
+
+    int dim = A.size();
+    if(dim == 0)
+        return 1;
+    
+    if(dim == 1)
+        return A[0][0];
+    
+    if(dim == 2)
+        return A[0][0] * A[1][1] - A[0][1] * A[1][0];
+    
+    double det_result = 0;
+    int sign = 1;
+    for(int i = 0; i < dim; ++i)
+    {
+        vector<vector<double>> sub_mat(dim - 1, vector<double>(dim - 1, 0));
+        for(int j = 1; j < dim; ++j)
+        {
+            int temp = 0;
+            for(int k = 0; k < dim; ++k)
+            {
+                if(k != i)
+                {
+                    sub_mat[j-1][temp] = A[j][k];
+                    ++temp;
+                }
+            }
+        }
+
+        det_result += sign * A[0][i] * matrix_determinant(sub_mat);
+        sign = -sign;
+    }
+
+    return det_result;
+}
+
+vector<vector<double>> get_cofactor_matrix(vector<vector<double>> &A)
+{
+    if(A.size() != A[0].size())
+    {
+        cout << "Invalid size!" << endl;
+        return {{}};
+    }
+
+    int dim = A.size();
+    vector<vector<double>> co_mat(dim, vector<double>(dim, 0));
+    vector<vector<double>> sub_mat(dim - 1, vector<double>(dim - 1, 0));
+
+    int sign = -1;
+    for(int i = 0; i <dim; ++i)
+    {
+        for(int j = 0; j < dim; ++j)
+        {
+            int p = 0;
+            for(int k = 0; k < dim; ++k)
+            {
+                if(k == i)
+                    continue;
+
+                int q = 0;
+                for(int y = 0; y < dim; ++y)
+                {
+                    if(y == j)
+                        continue;
+
+                    sub_mat[p][q] = A[k][y];
+                    ++q;
+                }
+                ++p;
+            }
+
+            sign = (i + j) % 2 == 0 ? 1 : -1;
+            co_mat[i][j] = sign * matrix_determinant(sub_mat);
+        }
+    }
+
+    return co_mat;
 }
 
 vector<double> matrix_dot_vector(vector<vector<double>> &mat, vector<double> &vec)
 {
     if(mat[0].size() != vec.size())
+    {
+        cout << "Invalid size!" << endl;
         return {-1};
+    }
 
     int result_row = mat.size();
     int result_col = vec.size();
