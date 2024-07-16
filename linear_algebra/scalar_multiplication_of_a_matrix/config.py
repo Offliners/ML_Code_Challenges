@@ -5,12 +5,17 @@ config = {
     # num of testcase
     'num_testcase': 100,
 
-    # Probability of matrix determinant is zero
-    'prob_zero_det' : 0.1,
+    # Boundary of scalar
+    'k_lower' : -500,
+    'k_upper' : 500,
 
-    # Boundary of matrix size
-    'size_row' : 2,
-    'size_col' : 2,
+    # Boundary of matrix row size
+    'size_row_lower' : 2,
+    'size_row_upper' : 500,
+
+    # Boundary of matrix col size
+    'size_col_lower' : 2,
+    'size_col_upper' : 500,
 
     # Boundary of value
     'value_lower' : -10000,
