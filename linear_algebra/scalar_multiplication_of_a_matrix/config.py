@@ -8,7 +8,7 @@ config = {
     # Probability of matrix determinant is zero
     'prob_zero_det' : 0.1,
 
-    # Matrix size
+    # Boundary of matrix size
     'size_row' : 2,
     'size_col' : 2,
 
