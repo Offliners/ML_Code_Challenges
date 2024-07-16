@@ -6,7 +6,7 @@ using namespace std;
 
 vector<double> linear_regression_normal_equation(vector<vector<double>>&, vector<double>&);
 vector<vector<double>> transpose_matrix(vector<vector<double>>&);
-vector<vector<double>> matrix_multiplication(vector<vector<double>>&, vector<vector<double>>&);
+vector<vector<double>> matrixmul(vector<vector<double>>&, vector<vector<double>>&);
 vector<vector<double>> matrix_inverse(vector<vector<double>>&);
 double matrix_determinant(vector<vector<double>>&);
 vector<vector<double>> get_cofactor_matrix(vector<vector<double>>&);
@@ -42,9 +42,9 @@ int main(void)
 vector<double> linear_regression_normal_equation(vector<vector<double>> &X, vector<double> &y)
 {
     vector<vector<double>> X_T = transpose_matrix(X);
-    vector<vector<double>> X_T_X = matrix_multiplication(X_T, X);
+    vector<vector<double>> X_T_X = matrixmul(X_T, X);
     vector<vector<double>> X_T_X_inv = matrix_inverse(X_T_X);
-    vector<vector<double>> X_T_X_inv_X_T = matrix_multiplication(X_T_X_inv, X_T);
+    vector<vector<double>> X_T_X_inv_X_T = matrixmul(X_T_X_inv, X_T);
     vector<double> theta = matrix_dot_vector(X_T_X_inv_X_T, y);
 
     return theta;
@@ -62,22 +62,18 @@ vector<vector<double>> transpose_matrix(vector<vector<double>> &mat)
     return mat_T;
 }
 
-vector<vector<double>> matrix_multiplication(vector<vector<double>> &A, vector<vector<double>> &B)
+vector<vector<double>> matrixmul(vector<vector<double>> &A, vector<vector<double>> &B)
 {
     int A_row = A.size();
     int A_col = A[0].size();
     int B_row = B.size();
     int B_col = B[0].size();
-
     if(A_col != B_row)
-    {
-        cout << "Invalid size!" << endl;
-        return {{}};
-    }
-    
+        return {{-1}};
+
     vector<vector<double>> C(A_row, vector<double>(B_col, 0));
     for(int i = 0; i < A_row; ++i)
-        for(int j = 0; j < A_col; ++j)
+        for(int j = 0; j < B_col; ++j)
             for(int k = 0; k < B_row; ++k)
                 C[i][j] += A[i][k] * B[k][j];
     
