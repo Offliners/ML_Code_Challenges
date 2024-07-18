@@ -23,7 +23,7 @@ int main(void)
         for(int i = 0; i < row; ++i)
         {
             for(int j = 0; j < col; ++j)
-                printf("%lf ", mat_inv[i][j]);
+                printf("%.8lf ", mat_inv[i][j]);
             printf("\n");
         }
     }

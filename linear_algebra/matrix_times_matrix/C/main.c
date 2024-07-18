@@ -29,7 +29,7 @@ int main(void)
         for(int i = 0; i < row_A; ++i)
         {
             for(int j = 0; j < col_B; ++j)
-                printf("%lf ", ans[i][j]);
+                printf("%.8lf ", ans[i][j]);
             printf("\n");
         }
     }

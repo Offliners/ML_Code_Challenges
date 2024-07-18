@@ -26,7 +26,7 @@ int main(void)
     for(int i = 0; i < ans_row; ++i)
     {
         for(int j = 0; j < ans_col; ++j)
-            printf("%lf ", ans[i][j]);
+            printf("%.8lf ", ans[i][j]);
         printf("\n");
     }
 

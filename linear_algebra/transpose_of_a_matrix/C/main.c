@@ -22,7 +22,7 @@ int main(void)
     for(int i = 0; i < mat_T_row; ++i)
     {
         for(int j = 0; j < mat_T_col; ++j)
-            printf("%lf ", mat_T[i][j]);
+            printf("%.8lf ", mat_T[i][j]);
         printf("\n");
     }
 

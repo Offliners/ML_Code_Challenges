@@ -28,7 +28,7 @@ int main(void)
     else
     {
         for(int i = 0; i < row_A; ++i)
-            printf("%lf ", ans[i]);
+            printf("%.8lf ", ans[i]);
         printf("\n");
     }
 
