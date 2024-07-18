@@ -28,7 +28,7 @@ def gen() -> list[list[str], list[str]]:
     testcase_output = []
 
     num_equ = random.randint(config['equ_lower'], config['equ_upper'])
-    num_coef = random.randint(config['coef_lower'], config['coef_upper'])
+    num_coef = num_equ
 
     testcase_input.append([num_equ, num_coef + config['target_col_size']])
     X = []

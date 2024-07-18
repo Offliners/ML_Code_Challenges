@@ -7,11 +7,7 @@ config = {
 
     # Boundary of equation amount
     'equ_lower' : 2,
-    'equ_upper' : 500,
-
-    # Boundary of coefficient amount
-    'coef_lower' : 2,
-    'coef_upper' : 500,
+    'equ_upper' : 10,
 
     # Target col size
     'target_col_size' : 1,

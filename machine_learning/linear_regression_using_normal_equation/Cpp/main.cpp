@@ -9,6 +9,7 @@ vector<vector<double>> transpose_matrix(vector<vector<double>>&);
 vector<vector<double>> matrixmul(vector<vector<double>>&, vector<vector<double>>&);
 vector<vector<double>> matrix_inverse(vector<vector<double>>&);
 double matrix_determinant(vector<vector<double>>&);
+void scalar_multiply(vector<vector<double>>&, double);
 vector<vector<double>> get_cofactor_matrix(vector<vector<double>>&);
 vector<double> matrix_dot_vector(vector<vector<double>>&, vector<double>&);
 
@@ -33,7 +34,7 @@ int main(void)
 
     vector<double> theta = linear_regression_normal_equation(X, y);
     for(int i = 0; i < theta.size(); ++i)
-        cout << theta[i] << " ";
+        cout << fixed << setprecision(8) << theta[i] << " ";
     cout << endl;
 
     return 0;
@@ -94,10 +95,7 @@ vector<vector<double>> matrix_inverse(vector<vector<double>> &A)
     vector<vector<double>> inv_mat = A;
     inv_mat = get_cofactor_matrix(inv_mat);
     inv_mat = transpose_matrix(inv_mat);
-
-    for(int i = 0; i < dim; ++i)
-        for(int j = 0; j < dim; ++j)
-            inv_mat[i][j] *= det_inv;
+    scalar_multiply(inv_mat, det_inv);
 
     return inv_mat;
 }
@@ -145,6 +143,16 @@ double matrix_determinant(vector<vector<double>> &A)
     return det_result;
 }
 
+void scalar_multiply(vector<vector<double>> &mat, double k)
+{
+    int row = mat.size();
+    int col = mat[0].size();
+
+    for(int i = 0; i < row; ++i)
+        for(int j = 0; j < col; ++j)
+            mat[i][j] *= k;
+}
+
 vector<vector<double>> get_cofactor_matrix(vector<vector<double>> &A)
 {
     if(A.size() != A[0].size())
@@ -158,14 +166,14 @@ vector<vector<double>> get_cofactor_matrix(vector<vector<double>> &A)
     vector<vector<double>> sub_mat(dim - 1, vector<double>(dim - 1, 0));
 
     int sign = -1;
-    for(int i = 0; i <dim; ++i)
+    for(int i = 0; i < dim; ++i)
     {
         for(int j = 0; j < dim; ++j)
         {
             int p = 0;
-            for(int k = 0; k < dim; ++k)
+            for(int x = 0; x < dim; ++x)
             {
-                if(k == i)
+                if(x == i)
                     continue;
 
                 int q = 0;
@@ -174,7 +182,7 @@ vector<vector<double>> get_cofactor_matrix(vector<vector<double>> &A)
                     if(y == j)
                         continue;
 
-                    sub_mat[p][q] = A[k][y];
+                    sub_mat[p][q] = A[x][y];
                     ++q;
                 }
                 ++p;
