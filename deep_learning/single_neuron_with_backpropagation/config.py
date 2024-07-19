@@ -5,6 +5,10 @@ config = {
     # num of testcase
     'num_testcase': 100,
 
+    # Boundary of epochs
+    'epoch_lower' : 1,
+    'epoch_upper' : 10,
+
     # Boundary of data amount
     'data_lower' : 2,
     'data_upper' : 10000,
@@ -17,13 +21,17 @@ config = {
     'feature_lower' : -10,
     'feature_upper' : 10,
 
-    # Boundary of weight
+    # Boundary of initial weight
     'weight_lower' : -1,
     'weight_upper' : 1,
 
-    # Boundary of bias
+    # Boundary of initial bias
     'bias_lower' : -1,
     'bias_upper' : 1,
+
+    # Boundary of learning rate
+    'lr_lower' : 1e-4,
+    'lr_upper' : 1e-1,
 
     # Labels
     'true_label' : 1,

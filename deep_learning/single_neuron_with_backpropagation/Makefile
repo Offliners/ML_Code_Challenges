@@ -3,8 +3,8 @@ C_DIR = C
 
 LDLAGS  = -lm
 
-CPP_OUTPUT = SN_cpp
-C_OUTPUT = SN_c
+CPP_OUTPUT = SNWB_cpp
+C_OUTPUT = SNWB_c
 
 all:                                                                                                                                                                                                        
 	g++ ./$(CPP_DIR)/main.cpp -o $(CPP_OUTPUT)
