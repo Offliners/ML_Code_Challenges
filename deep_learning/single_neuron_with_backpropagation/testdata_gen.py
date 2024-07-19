@@ -12,6 +12,7 @@ class bcolors:
 
 random.seed(config['seed'])
 
+
 def single_neuron_model(features: list[list[float]], labels: list[bool], weights: list[float], bias: float) -> list[float] | float:
     probabilities = []
     for feature_vector in features:
