@@ -23,6 +23,7 @@ $ python3 compare.py
 | Matrix times Vector                     | linear algebra   | Easy       | [link](./linear_algebra/matrix_times_vector/matrix_times_vector.md)                                           |
 | Calculate Covariance Matrix             | linear algebra   | Medium     | [link](./linear_algebra/calculate_covariance_matrix/calculate_covariance_matrix.md)                           |
 | Linear Regression Using Normal Equation | machine learning | Easy       | [link](./machine_learning/linear_regression_using_normal_equation/linear_regression_using_normal_equation.md) |
+| Single Neuron                           | deep learning    | Easy       | [link](./deep_learning/single_neuron/single_neuron.md)                                                        |
 | Transpose of a Matrix                   | linear algebra   | Easy       | [link](./linear_algebra/transpose_of_a_matrix/transpose_of_a_matrix.md)                                       |
 | Scalar Multiplication of a Matrix       | linear algebra   | Easy       | [link](./linear_algebra/scalar_multiplication_of_a_matrix/scalar_multiplication_of_a_matrix.md)               |
 | Calculate 2x2 Matrix Inverse            | linear algebra   | Medium     | [link](./linear_algebra/calculate_2x2_matrix_inverse/calculate_2x2_matrix_inverse.md)                         |
