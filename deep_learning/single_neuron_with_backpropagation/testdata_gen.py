@@ -13,7 +13,7 @@ class bcolors:
 np.random.seed(config['seed'])
 random.seed(config['seed'])
 
-def sigmoid(x: float) -> float:
+def sigmoid(x: list[float]) -> list[float]:
     return 1 / (1 + np.exp(-x))
 
 def train_neuron(features: list[list[float]], 

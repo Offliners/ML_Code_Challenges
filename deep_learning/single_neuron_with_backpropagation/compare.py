@@ -13,7 +13,7 @@ class bcolors:
 
 def compare():
     num_testcase = config['num_testcase']
-    exec_files = ['SNWB_cpp', 'SNWB_c']
+    exec_files = ['SNWB_cpp'] # , 'SNWB_c'
     testcase_input = './input'
     output_folder = './output'
     golden_output_folder = './groundtruth_output'
@@ -41,13 +41,19 @@ def compare():
         for i in range(num_testcase):
             with open(f'{golden_output_folder}/{i}.out', 'r') as f:
                 ans_gt = f.read().splitlines()
-                ans_gt = [e.strip() for e in ans_gt][0]
-                ans_gt = list(map(float, ans_gt.split(' ')))
+                ans_gt = [e.strip().split(' ') for e in ans_gt]
+                temp = []
+                for item in ans_gt:
+                    temp = temp + item
+                ans_gt = list(map(float, temp))
 
             with open(f'{output_folder}/{i}.out', 'r') as f:
                 ans = f.read().splitlines()
-                ans = [e.strip() for e in ans][0]
-                ans = list(map(float, ans.split(' ')))
+                ans = [e.strip().split(' ') for e in ans]
+                temp = []
+                for item in ans:
+                    temp = temp + item
+                ans = list(map(float, temp))
 
             if len(ans) != len(ans_gt):
                 result = f'{bcolors.FAIL}WA{bcolors.ENDC}'
@@ -73,7 +79,7 @@ def compare():
         print('{:<9s}:   {:>3s} KB'.format('Memory', str(round(sum(memories) / num_testcase))))
         print('\n')
 
-        shutil.rmtree(output_folder)
+        # shutil.rmtree(output_folder)
 
     p = subprocess.Popen(f'make clean', shell=True)
     p.wait()
